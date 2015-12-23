@@ -1,5 +1,5 @@
 ### QNIBTerminal debian image
-FROM qnib/d-syslog
+FROM qnib/d-syslog:squeeze
 
 ENV TERM=xterm \
     BOOTSTRAP_CONSUL=false \
