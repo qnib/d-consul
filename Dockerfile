@@ -1,11 +1,11 @@
 ### QNIBTerminal debian image
-FROM qnib/d-syslog
+FROM qnib/d-syslog:wheezy
 
 ENV TERM=xterm \
     BOOTSTRAP_CONSUL=false \
     RUN_SERVER=false \
-    CONSUL_VER=0.5.2 \
-    CT_VER=0.11.1
+    CONSUL_VER=0.6.3 \
+    CT_VER=0.12.1
 RUN apt-get update && \
     apt-get install -y bsdtar curl 
 RUN curl -fsL https://dl.bintray.com/mitchellh/consul/${CONSUL_VER}_linux_amd64.zip | bsdtar xf - -C /usr/local/bin/ && \
