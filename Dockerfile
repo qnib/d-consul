@@ -1,14 +1,14 @@
 ### QNIBTerminal debian image
-FROM qnib/d-syslog
+FROM qnib/d-syslog:wheezy
 
 ENV TERM=xterm \
     BOOTSTRAP_CONSUL=false \
     RUN_SERVER=false \
-    CONSUL_VER=0.5.2 \
+    CONSUL_VER=0.6.3 \
     CT_VER=0.11.1
 RUN apt-get update && \
     apt-get install -y bsdtar curl 
-RUN curl -fsL https://dl.bintray.com/mitchellh/consul/${CONSUL_VER}_linux_amd64.zip | bsdtar xf - -C /usr/local/bin/ && \
+RUN curl -fsL https://releases.hashicorp.com/consul/${CONSUL_VER}/consul_${CONSUL_VER}_linux_amd64.zip | bsdtar xf - -C /usr/local/bin/ && \
     chmod +x /usr/local/bin/consul
 RUN mkdir -p /opt/consul-web-ui/ && \
     curl -fsL http://dl.bintray.com/mitchellh/consul/${CONSUL_VER}_web_ui.zip | bsdtar xf - -C /opt/consul-web-ui/ && \
