@@ -1,5 +1,5 @@
 ### QNIBTerminal debian image
-FROM qnib/d-syslog:wheezy
+FROM qnib/d-syslog
 
 ENV TERM=xterm \
     BOOTSTRAP_CONSUL=false \
