@@ -7,7 +7,7 @@ ENV TERM=xterm \
     CONSUL_VER=0.6.3 \
     CT_VER=0.11.1
 RUN apt-get update && \
-    apt-get install -y bsdtar curl 
+    apt-get install -y bsdtar curl jq bc
 RUN curl -fsL https://releases.hashicorp.com/consul/${CONSUL_VER}/consul_${CONSUL_VER}_linux_amd64.zip | bsdtar xf - -C /usr/local/bin/ && \
     chmod +x /usr/local/bin/consul
 RUN mkdir -p /opt/consul-web-ui/ && \
