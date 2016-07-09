@@ -4,8 +4,9 @@ FROM qnib/d-supervisor
 ENV TERM=xterm \
     BOOTSTRAP_CONSUL=false \
     RUN_SERVER=false \
-    CONSUL_VER=0.6.3 \
-    CT_VER=0.11.1
+    CONSUL_VER=0.6.4 \
+    CT_VER=0.15.0 \
+    QNIB_CONSUL=0.1.3.4
 RUN apt-get update && \
     apt-get install -y bsdtar curl jq bc
 RUN curl -fsL https://releases.hashicorp.com/consul/${CONSUL_VER}/consul_${CONSUL_VER}_linux_amd64.zip | bsdtar xf - -C /usr/local/bin/ && \
@@ -19,7 +20,4 @@ RUN curl -Lsf https://releases.hashicorp.com/consul-template/${CT_VER}/consul-te
 
 ADD etc/consul.json /etc/consul.json
 ADD etc/supervisord.d/consul.ini /etc/supervisord.d/
-ADD opt/qnib/consul/bin/start.sh /opt/qnib/consul/bin/
-RUN mkdir -p /opt/qnib/bin && \
-    ln -s /opt/qnib/consul/bin/start.sh /opt/qnib/bin/start_consul.sh
-ADD opt/qnib/consul/etc/bash_functions.sh /opt/qnib/consul/etc/
+RUN curl -fsL https://github.com/qnib/consul-content/releases/download/${QNIB_CONSUL}/consul.tar |tar xf - -C /opt/qnib/
