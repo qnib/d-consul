@@ -3,10 +3,10 @@ FROM qnib/d-supervisor
 
 ENV TERM=xterm \
     BOOTSTRAP_CONSUL=false \
+    RUN_SERVER=false \
     CONSUL_VER=0.6.4 \
-    CONSUL_CLI_VER=0.2.0 \
     CT_VER=0.15.0 \
-    QNIB_CONSUL=0.1.1
+    QNIB_CONSUL=0.1.3.4
 RUN apt-get update && \
     apt-get install -y bsdtar curl jq bc
 RUN curl -fsL https://releases.hashicorp.com/consul/${CONSUL_VER}/consul_${CONSUL_VER}_linux_amd64.zip | bsdtar xf - -C /usr/local/bin/ && \
@@ -21,5 +21,3 @@ RUN curl -fsL https://github.com/qnib/consul-content/releases/download/${QNIB_CO
 
 ADD etc/consul.d/agent.json /etc/consul.d/
 ADD etc/supervisord.d/consul.ini /etc/supervisord.d/
-RUN mkdir -p /opt/qnib/bin && \
-    ln -s /opt/qnib/consul/bin/start.sh /opt/qnib/bin/start_consul.sh
